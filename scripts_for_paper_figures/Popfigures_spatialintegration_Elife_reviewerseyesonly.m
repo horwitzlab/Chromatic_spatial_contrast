@@ -56,22 +56,9 @@ end
 % Loading all the files 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
-
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
 % These are files that I am concerned with
 load RHO_all.mat
@@ -382,22 +369,10 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 
 % Measuring the OFF-rebound responses from the Isoresponse phase
@@ -577,22 +552,9 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
-
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
 % Measuring the OFF-rebound responses from the Isoresponse phase
 N = numel(filename);
@@ -874,7 +836,6 @@ set(gcf, 'renderer', 'painters')
 plot_counter = plot_counter + 1;
 
 
-
 % Some more stats
 [p1,~] = ranksum(Isoresponse_NLI([hardtoclassifyidx_woPC1]),Isoresponse_NLI([hardtoclassifyidx_wPC1])); % Isoresponse NLI
 [p2,~] = ranksum(log10(Acrosssubunits_medianofdifferences([hardtoclassifyidx_woPC1])),log10(Acrosssubunits_medianofdifferences([hardtoclassifyidx_wPC1]))); % Isoresponse NLI
@@ -1028,22 +989,10 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 
 % Classifying cells into simple, DO and hardtoclassify cells
@@ -1280,22 +1229,10 @@ if ~exist('plot_counter')
 end
 
 % Loading all the files  
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 global reversalflagidx stepsizescale stepsize nreversals
 stro = nex2stro(findfile(char(filename(74))));
@@ -1445,22 +1382,10 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 
 % Classifying cells into simple, DO and hardtoclassify cells
@@ -1648,22 +1573,11 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
+
 
 
 for ii= 1:numel(1)
@@ -1859,22 +1773,10 @@ for ii = 1:numel(RSSE_linearmodel)
 end
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 % These are files that I am concerned with
 load RHO_all.mat
@@ -2151,22 +2053,10 @@ for ii = 1:numel(RSSE_linearmodel)
 end
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
 
 % Acquiring the total pixels in subregions 1 and 2

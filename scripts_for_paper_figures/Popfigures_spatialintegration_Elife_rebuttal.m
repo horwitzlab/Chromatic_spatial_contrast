@@ -130,21 +130,10 @@ if ~exist('plot_counter')
 end
 
 % Loading all the files
-try 
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeIdx = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeIdx = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeIdx = str2num(cell2mat(spikeIdx));
-end
 
 
 % Include Gun noise data for statistical tests in order to estimate the RF size
@@ -276,21 +265,10 @@ end
 %% A continuation of Figure 2- Code for plotting the checkerboard STA along with the spatial weighting map
 
 % Loading all the files 
-try 
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeIdx = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeIdx = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeIdx = str2num(cell2mat(spikeIdx));
-end
     
 spikename_options = ['sig001a'; 'sig001b'];
 
@@ -633,22 +611,10 @@ for ii = 1:numel(RSSE_linearmodel)
 end
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 % These are files that I am concerned with
 load RHO_all.mat
@@ -1135,17 +1101,6 @@ for ii = 1:numel(AUROClinsubunits)
     JK_error_isoresponse = [JK_error_isoresponse; error_Iso];
 end
 
-% figure(plot_counter); hold on;
-% plot(Isoresponse_NLI(LUMidx), Whitenoise_NLI(LUMidx), 'o', 'MarkerFaceColor', [0 0 0],'MarkerEdgeColor',[1 1 1]);
-% plot(Isoresponse_NLI(indices(1)), Whitenoise_NLI(indices(1)), 'o', 'MarkerFaceColor', [0 0 0],'MarkerEdgeColor',[0 1 0]);
-% plot(Isoresponse_NLI(DOidx), Whitenoise_NLI(DOidx), 'o', 'MarkerFaceColor', [1 0 0],'MarkerEdgeColor',[1 1 1]);
-% plot(Isoresponse_NLI(indices(2)), Whitenoise_NLI(indices(2)), 'o', 'MarkerFaceColor', [1 0 0],'MarkerEdgeColor',[0 1 0]);
-% plot(Isoresponse_NLI(hardtoclassifyidx), Whitenoise_NLI(hardtoclassifyidx), 'o', 'MarkerFaceColor', [0.5 0.5 0.5],'MarkerEdgeColor',[1 1 1]);
-% plot(Isoresponse_NLI(indices(3)), Whitenoise_NLI(indices(3)), 'o', 'MarkerFaceColor', [0.5 0.5 0.5],'MarkerEdgeColor',[0 1 0]);
-% set(gca,'Tickdir','out','Xlim',[-1 2],'XTick',[-1 0 1 2],'Ylim',[-0.02 0.08],'YTick',[-0.02:0.02:0.08]); 
-% xlabel('Isoresponse NLI'); ylabel('WhiteNoise NLI'); axis square; hold off;
-% set(gcf,'renderer','painters');
-% plot_counter = plot_counter + 1;
 
 % Some basic stats
 [r1,p1] = corr(Isoresponse_NLI(LUMidx),Whitenoise_NLI(LUMidx),'type','Spearman');
@@ -1621,22 +1576,9 @@ end
 
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
-
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
 
 % Classifying cells into simple, DO and hardtoclassify cells
@@ -1956,22 +1898,10 @@ if ~exist('plot_counter')
 end
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
 
 stro = nex2stro(findfile(char(filename(24))));
 global spikename maskidx spikeidx neurothreshidx nstixperside ngammasteps seedidx nframesidx correctidx
@@ -2163,22 +2093,9 @@ if ~exist('plot_counter')
 end
 
 % Loading all the files 
-try 
-    % Using the JDBC connection
-    conn = database('Abhishek','horwitzlab','vector','Vendor','MySql','Server','128.95.153.12');
-    filename = fetch(conn,'SELECT filename FROM WNthresh');
-    NTmode = fetch(conn,'SELECT NTmode FROM WNthresh');
-    spikeidx_NT = cell2mat(fetch(conn,'SELECT spikeidx FROM WNthresh'));
-    close(conn);
-    filename = filename(strcmp(string(NTmode),"subunit"));
-    NTmode = NTmode(strcmp(string(NTmode),"subunit"));
-    spikeidx_NT = spikeidx_NT(strcmp(string(NTmode),"subunit"));
-
-catch
-    csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
-    [filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
-    spikeidx_NT = str2num(cell2mat(spikeIdx));
-end
+csv_filename = '/Users/abhishekde/Desktop/MatlabCode/Abhishek/CSV_PHPmyadmin_files/WNthresh.csv';
+[filename, NTmode, spikeIdx] = get_WNthreshdata_from_csvfile(csv_filename, 'subunit');
+spikeidx_NT = str2num(cell2mat(spikeIdx));
 
 
 load conewts_svd.mat
@@ -2399,14 +2316,6 @@ end
 
 % Plotting the results for SVD based cone weight classification including the PC1 z-scores 
 indices = [109 24 74]; % example cells
-% figure(plot_counter);
-% plot(RSSEisoresp_lin_median(hardtoclassifyidx),RSSEisoresp_quad_median(hardtoclassifyidx),'o','MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor',[1 1 1]); hold on;
-% plot(RSSEisoresp_lin_median(LUMidx),RSSEisoresp_quad_median(LUMidx),'o','MarkerFaceColor',[0 0 0],'MarkerEdgeColor',[1 1 1]); hold on;
-% plot(RSSEisoresp_lin_median(indices(1)),RSSEisoresp_quad_median(indices(1)),'o','MarkerFaceColor',[0 0 0],'MarkerEdgeColor',[0 1 0]);
-% plot(RSSEisoresp_lin_median(DOidx),RSSEisoresp_quad_median(DOidx),'o','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[1 1 1]); plot([0.0001 10],[0.0001 10],'k');
-% plot(RSSEisoresp_lin_median(indices(2)),RSSEisoresp_quad_median(indices(2)),'o','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[0 1 0]);
-% plot(RSSEisoresp_lin_median(indices(3)),RSSEisoresp_quad_median(indices(3)),'o','MarkerFaceColor',[0.5 0.5 0.5],'MarkerEdgeColor',[0 1 0]);
-
 
 figure(plot_counter); hold on;
 errorbar(RSSEisoresp_lin_median(hardtoclassifyidx), RSSEisoresp_quad_median(hardtoclassifyidx), lin_std_error(hardtoclassifyidx), lin_std_error(hardtoclassifyidx), quad_std_error(hardtoclassifyidx), quad_std_error(hardtoclassifyidx), 'o', 'MarkerFaceColor', [0.5 0.5 0.5],'MarkerEdgeColor',[1 1 1], 'color', [0.5 0.5 0.5]);
