@@ -1,10 +1,8 @@
 # Chromatic spatial contrast
-This repository contains supplementary information and Matlab code accompanying the manuscript by De and Horwitz, "Coding of chromatic spatial contrast by macaque V1 neurons"
+This repository contains supplementary information and Matlab code accompanying the manuscript by De and Horwitz, "Coding of chromatic spatial contrast by macaque V1 neurons". Please read the [license] (https://github.com/horwitzlab/Chromatic_spatial_contrast/blob/b70edc892c0184126acab1fe7586e8302df23428/LICENSE) before using contents of this repository.
 
-# monitor details
- Matlab structure containing the following fields:
-    background_rgb: intensity of the red, green, and blue primaries to the background of the display in normalized units (0 = minimum intensity, 1 = maximum intensity).
-    wavelengths: lattice of wavelengths at which irradiance was measured (in nm).
-    red_phosphor_spd: spectral power distribution of the red monitor phosphor measured at maximum intensity. Irradiance is measured in "watts/sr•m^2•bin” for each 5 nm-wide bin.
-    green_phosphor_spd: as above, but for the green phosphor.
-    blue_phosphor_spd: as above, but for the blue phosphor.
+## The repository contains 4 major folders:
+- Datasets: Datasets for analysis and generating figures relevant to De and Horwitz, 2021.
+- Scripts for analysis: Scripts for the analysis of spatial signal integration between 2 subregions of a RF in response to whitenoise stimuli and isoresponse puctate flashes. This folder also contains script for the analysis of phosphor signal integration within individual subregions. 
+- Scripts for paper figures: Scripts for generating main figures and responses to reviewers' comments.
+- utils: Utils for white noise analysis and model fitting
